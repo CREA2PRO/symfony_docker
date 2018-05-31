@@ -1,0 +1,23 @@
+version: "3"
+services:
+  front:
+    build: dockerfiles/front
+    volumes:
+      - ./:/var/www/html
+      - ~/.composer_server/cache:/root/.composer/cache
+    environment:
+      XDEBUG_CONFIG: PHPSTORM
+      PHP_IDE_CONFIG: serverName=xdebugServer
+    ports:
+      - 80:80
+  db:
+    image: mariadb:10.3
+    ports:
+      - 3306:3306
+    volumes:
+      - ./var/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpwd
+      - MYSQL_DATABASE=app
+      - MYSQL_USER=app
+      - MYSQL_PASSWORD=app_db
