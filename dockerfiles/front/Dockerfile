@@ -2,6 +2,10 @@ FROM php:7.2-apache
 
 RUN apt-get update
 
+# installation extension php : pdo_mysql
+RUN apt-get install zlib1g-dev
+RUN docker-php-ext-install pdo_mysql
+
 # installation de composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 #   dépendences de composer
